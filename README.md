@@ -1,4 +1,4 @@
-# Gemini CLI Context Engineer
+# Context Engineering for Gemini CLI
 
 A comprehensive template for getting started with Context Engineering - the discipline of engineering context for AI coding assistants so they have the information necessary to get the job done end to end.
 
@@ -8,11 +8,14 @@ A comprehensive template for getting started with Context Engineering - the disc
 
 ```bash
 # 1. Clone this template
-git clone https://github.com/your-username/Gemini-CLI-Context-Engineer.git
+git clone https://github.com/rickscode/Gemini-CLI-Context-Engineer.git
 cd Gemini-CLI-Context-Engineer
 
 # 2. Install Gemini CLI (if not already installed)
-npm install -g @google/generative-ai
+# For macOS/Linux:
+curl -fsSL https://storage.googleapis.com/generative-ai-cli/install.sh | sh
+
+# Or download from: https://github.com/google-gemini/generative-ai-cli/releases
 
 # 3. Create your initial feature request
 # Edit INITIAL.md with your feature requirements
@@ -60,7 +63,7 @@ Context Engineering represents a paradigm shift from traditional prompt engineer
 ## Template Structure
 
 ```
-gemini-cli-context-engineer/
+context-engineering-intro/
 ├── scripts/
 │   ├── generate-prp.sh    # Generates comprehensive PRPs
 │   └── execute-prp.sh     # Executes PRPs to implement features
@@ -69,7 +72,6 @@ gemini-cli-context-engineer/
 │   │   └── prp_base.md       # Base template for PRPs
 │   └── EXAMPLE_multi_agent_prp.md  # Example of a complete PRP
 ├── examples/                  # Your code examples (critical!)
-├── GEMINI.md                 # Global rules for AI assistant
 ├── INITIAL.md               # Template for feature requests
 ├── INITIAL_EXAMPLE.md       # Example feature request
 └── README.md                # This file
@@ -79,17 +81,19 @@ This template doesn't focus on RAG and tools with context engineering because I 
 
 ## Step-by-Step Guide
 
-### 1. Set Up Global Rules (GEMINI.md)
+### 1. Authenticate with Gemini CLI
 
-The `GEMINI.md` file contains project-wide rules that the AI assistant will follow in every conversation. The template includes:
+Before using the scripts, authenticate with your Google account:
 
-- **Project awareness**: Reading planning docs, checking tasks
-- **Code structure**: File size limits, module organization
-- **Testing requirements**: Unit test patterns, coverage expectations
-- **Style conventions**: Language preferences, formatting rules
-- **Documentation standards**: Docstring formats, commenting practices
+```bash
+# Login to get free Gemini Code Assist license
+gemini auth login
 
-**You can use the provided template as-is or customize it for your project.**
+# Verify authentication
+gemini auth status
+```
+
+This gives you access to Gemini 2.5 Pro with 1M token context window and generous rate limits (60 requests/minute, 1000/day).
 
 ### 2. Create Your Initial Feature Request
 
@@ -150,7 +154,7 @@ The script will:
 ## 🤖 How It Works
 
 ### Generate Script (`generate-prp.sh`)
-- Reads your INITIAL.md requirements
+- Reads your INITIAL.md requirements   
 - Extracts feature name automatically
 - Creates current codebase tree
 - Generates Gemini CLI-specific context prompt
