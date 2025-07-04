@@ -1,0 +1,13 @@
+{
+  "results": [
+    {
+      "id": 1,
+      "title": "Chicken and Vegetable Stir-fry",
+      "image": "",
+      "prep_time": "15 minutes",
+      "cook_time": "10 minutes",
+      "difficulty": "Easy",
+      "match_percentage": 90
+    }
+  ]
+}

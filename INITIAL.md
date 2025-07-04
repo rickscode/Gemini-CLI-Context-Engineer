@@ -40,7 +40,7 @@ Create these example files in the examples/ folder:
 
 ## DOCUMENTATION:
 **Local Data Sources:**
-- Create static JSON files for recipe database (no external API calls)
+- Use static JSON files for recipe database (no external API calls)
 - Include pre-calculated nutritional data in recipe objects
 - Store ingredient information locally with basic nutritional facts
 - Implement client-side search and filtering algorithms

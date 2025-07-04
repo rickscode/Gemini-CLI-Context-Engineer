@@ -35,7 +35,7 @@ echo "📋 Passing PRP to Gemini for implementation..."
 # Use Gemini CLI to process the PRP and implement the feature
 # Add delay to avoid rate limiting
 sleep 10
-gemini -f "$PRP_FILE"
+cat "$PRP_FILE" | gemini -y
 
 echo ""
 echo "🎉 Gemini CLI execution completed!"

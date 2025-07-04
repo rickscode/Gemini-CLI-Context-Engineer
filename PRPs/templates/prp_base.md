@@ -65,6 +65,11 @@ Template optimized for AI agents to implement features with sufficient context a
 # Example: We use pydantic v2 and  
 ```
 
+### Web Development Best Practices
+- **Security**: Avoid using `innerHTML` to prevent XSS vulnerabilities. Instead, use `createElement` to create elements and `textContent` or `innerText` to set their text content.
+- **Performance**: Minimize DOM manipulation. Batch DOM updates when possible.
+- **Accessibility**: Ensure all interactive elements are keyboard accessible and that images have appropriate `alt` text.
+
 ## Implementation Blueprint
 
 ### Data models and structure
