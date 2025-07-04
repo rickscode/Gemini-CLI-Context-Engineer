@@ -1,4 +1,4 @@
-# Context Engineering Template
+# Gemini CLI Context Engineer
 
 A comprehensive template for getting started with Context Engineering - the discipline of engineering context for AI coding assistants so they have the information necessary to get the job done end to end.
 
@@ -8,25 +8,20 @@ A comprehensive template for getting started with Context Engineering - the disc
 
 ```bash
 # 1. Clone this template
-git clone https://github.com/coleam00/Context-Engineering-Intro.git
-cd Context-Engineering-Intro
+git clone https://github.com/your-username/Gemini-CLI-Context-Engineer.git
+cd Gemini-CLI-Context-Engineer
 
-# 2. Set up your project rules (optional - template provided)
-# Edit CLAUDE.md to add your project-specific guidelines
+# 2. Install Gemini CLI (if not already installed)
+npm install -g @google/generative-ai
 
-# 3. Add examples (highly recommended)
-# Place relevant code examples in the examples/ folder
-
-# 4. Create your initial feature request
+# 3. Create your initial feature request
 # Edit INITIAL.md with your feature requirements
 
-# 5. Generate a comprehensive PRP (Product Requirements Prompt)
-# In Claude Code, run:
-/generate-prp INITIAL.md
+# 4. Generate a comprehensive PRP (Product Requirements Prompt)
+./scripts/generate-prp.sh INITIAL.md
 
-# 6. Execute the PRP to implement your feature
-# In Claude Code, run:
-/execute-prp PRPs/your-feature-name.md
+# 5. Execute the PRP with Gemini CLI to implement your feature
+./scripts/execute-prp.sh PRPs/your-feature-name.md
 ```
 
 ## 📚 Table of Contents
@@ -65,18 +60,16 @@ Context Engineering represents a paradigm shift from traditional prompt engineer
 ## Template Structure
 
 ```
-context-engineering-intro/
-├── .claude/
-│   ├── commands/
-│   │   ├── generate-prp.md    # Generates comprehensive PRPs
-│   │   └── execute-prp.md     # Executes PRPs to implement features
-│   └── settings.local.json    # Claude Code permissions
+gemini-cli-context-engineer/
+├── scripts/
+│   ├── generate-prp.sh    # Generates comprehensive PRPs
+│   └── execute-prp.sh     # Executes PRPs to implement features
 ├── PRPs/
 │   ├── templates/
 │   │   └── prp_base.md       # Base template for PRPs
 │   └── EXAMPLE_multi_agent_prp.md  # Example of a complete PRP
 ├── examples/                  # Your code examples (critical!)
-├── CLAUDE.md                 # Global rules for AI assistant
+├── GEMINI.md                 # Global rules for AI assistant
 ├── INITIAL.md               # Template for feature requests
 ├── INITIAL_EXAMPLE.md       # Example feature request
 └── README.md                # This file
@@ -86,9 +79,9 @@ This template doesn't focus on RAG and tools with context engineering because I 
 
 ## Step-by-Step Guide
 
-### 1. Set Up Global Rules (CLAUDE.md)
+### 1. Set Up Global Rules (GEMINI.md)
 
-The `CLAUDE.md` file contains project-wide rules that the AI assistant will follow in every conversation. The template includes:
+The `GEMINI.md` file contains project-wide rules that the AI assistant will follow in every conversation. The template includes:
 
 - **Project awareness**: Reading planning docs, checking tasks
 - **Code structure**: File size limits, module organization
@@ -129,37 +122,45 @@ PRPs (Product Requirements Prompts) are comprehensive implementation blueprints 
 
 They are similar to PRDs (Product Requirements Documents) but are crafted more specifically to instruct an AI coding assistant.
 
-Run in Claude Code:
+Run the generation script:
 ```bash
-/generate-prp INITIAL.md
+./scripts/generate-prp.sh INITIAL.md
 ```
 
-**Note:** The slash commands are custom commands defined in `.claude/commands/`. You can view their implementation:
-- `.claude/commands/generate-prp.md` - See how it researches and creates PRPs
-- `.claude/commands/execute-prp.md` - See how it implements features from PRPs
-
-The `$ARGUMENTS` variable in these commands receives whatever you pass after the command name (e.g., `INITIAL.md` or `PRPs/your-feature.md`).
-
 This command will:
-1. Read your feature request
-2. Research the codebase for patterns
-3. Search for relevant documentation
-4. Create a comprehensive PRP in `PRPs/your-feature-name.md`
+1. Read your feature request from INITIAL.md
+2. Extract the current codebase structure
+3. Create a comprehensive PRP in `PRPs/your-feature-name.md`
+4. Include validation commands and implementation guidelines
 
 ### 4. Execute the PRP
 
-Once generated, execute the PRP to implement your feature:
+Once generated, execute the PRP with Gemini CLI to implement your feature:
 
 ```bash
-/execute-prp PRPs/your-feature-name.md
+./scripts/execute-prp.sh PRPs/your-feature-name.md
 ```
 
-The AI coding assistant will:
-1. Read all context from the PRP
-2. Create a detailed implementation plan
-3. Execute each step with validation
-4. Run tests and fix any issues
-5. Ensure all success criteria are met
+The script will:
+1. Pass the PRP to Gemini CLI
+2. Let Gemini CLI read all context from the PRP
+3. Gemini CLI will implement the feature based on the requirements
+4. Review the generated files and test the implementation
+
+## 🤖 How It Works
+
+### Generate Script (`generate-prp.sh`)
+- Reads your INITIAL.md requirements
+- Extracts feature name automatically
+- Creates current codebase tree
+- Generates Gemini CLI-specific context prompt
+- Outputs structured PRP file
+
+### Execute Script (`execute-prp.sh`)
+- Validates PRP file exists
+- Checks Gemini CLI availability
+- Passes PRP file to Gemini CLI
+- Lets Gemini CLI handle the implementation
 
 ## Writing Effective INITIAL.md Files
 
@@ -188,39 +189,34 @@ The AI coding assistant will:
 
 ## The PRP Workflow
 
-### How /generate-prp Works
+### How the Scripts Work
 
-The command follows this process:
+**generate-prp.sh** follows this process:
 
-1. **Research Phase**
-   - Analyzes your codebase for patterns
-   - Searches for similar implementations
-   - Identifies conventions to follow
+1. **Input Validation**
+   - Checks if INITIAL.md exists
+   - Verifies Gemini CLI is available
 
-2. **Documentation Gathering**
-   - Fetches relevant API docs
-   - Includes library documentation
-   - Adds gotchas and quirks
+2. **Feature Extraction**
+   - Extracts feature name from input file
+   - Creates organized PRP structure
 
-3. **Blueprint Creation**
-   - Creates step-by-step implementation plan
-   - Includes validation gates
-   - Adds test requirements
+3. **Context Building**
+   - Adds current codebase tree
+   - Includes implementation guidelines
+   - Adds validation steps
 
-4. **Quality Check**
-   - Scores confidence level (1-10)
-   - Ensures all context is included
+4. **PRP Generation**
+   - Creates Gemini CLI-specific prompt
+   - Outputs structured markdown file
 
-### How /execute-prp Works
+**execute-prp.sh** follows this process:
 
-1. **Load Context**: Reads the entire PRP
-2. **Plan**: Creates detailed task list using TodoWrite
-3. **Execute**: Implements each component
-4. **Validate**: Runs tests and linting
-5. **Iterate**: Fixes any issues found
-6. **Complete**: Ensures all requirements met
+1. **Validation**: Checks PRP file exists and Gemini CLI is available
+2. **Execution**: Passes PRP to Gemini CLI with `gemini -f` command
+3. **Completion**: Gemini CLI implements the feature based on the PRP context
 
-See `PRPs/EXAMPLE_multi_agent_prp.md` for a complete example of what gets generated.
+See `PRPs/recipe-optimizer.md` for a complete example of what gets generated.
 
 ## Using Examples Effectively
 
@@ -285,12 +281,12 @@ examples/
 - Add MCP server resources
 - Reference specific documentation sections
 
-### 5. Customize CLAUDE.md
+### 5. Customize GEMINI.md
 - Add your conventions
 - Include project-specific rules
 - Define coding standards
 
 ## Resources
 
-- [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
+- [Gemini Code Documentation](https://www.google.com/docs/about/)
 - [Context Engineering Best Practices](https://www.philschmid.de/context-engineering)
